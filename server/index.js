@@ -9,9 +9,7 @@ const PORT = process.env.PORT || 5000;
 const moodRoutes = require('./routes/moods');
 
 app.use(cors());
-app.options('*', (req, res) => {
-    res.sendStatus(200);
-})
+app.options('*', cors());
 app.use(express.json());
 app.use(moodRoutes);
 
