@@ -20,14 +20,17 @@ const MoodSchema = new Schema({
 
     id: {
         type: String,
-        required: true,
-        default: nanoid(5),
-        unique: true
+        default: () => nanoid(10),
     },
 
     dislikes: {
         type: Number,
         default: 0
+    },
+
+    background: {
+        type: String,
+        default: 'https://images.pexels.com/photos/4448848/pexels-photo-4448848.jpeg'
     }
 })
 

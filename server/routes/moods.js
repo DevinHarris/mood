@@ -39,6 +39,26 @@ router.get('/mood/:id', (req, res) => {
         res.status(400).send('There was an error');
         console.log(err);
     }
+
+})
+
+router.put('/mood/:id', (req, res, next) => {
+    const { params, body } = req;
+    console.log(body.likes);
+
+    try {
+        Mood.findOneAndUpdate({ id: params.id }, {
+            $set: {
+                likes: body.likes,
+                dislikes: body.dislikes
+            }
+        }).then(mood => {
+            res.status(204).json(mood);
+        })
+    } catch (err) {
+        res.status(400).send('There was an error');
+        console.log(err);
+    }
 })
 
 

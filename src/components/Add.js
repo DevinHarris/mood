@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -50,20 +51,27 @@ const Add = () => {
 
     const { register, handleSubmit, reset } = useForm();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         console.log(data);
-        const { mood, name  } = data;
+        const { mood, name, background  } = data;
 
         const dataToSend = {
             mood,
             submittedBy: name,
             likes: 0,
-            dislike: 0
+            dislike: 0,
+            background
         }
 
-        api.post('/api/add', dataToSend);
+        api.post('/api/add', dataToSend).then((response) => {
+            const { data } = response;
+
+            navigate(`/mood/${data.id}`);
+        });
         dispatch({ type: 'mood/addMood', payload: dataToSend });
+    
         reset();
     };
 
@@ -75,6 +83,9 @@ const Add = () => {
                 </div>
                 <div>
                     <FormInput {...register('name')} placeholder="Name" />
+                </div>
+                <div>
+                    <FormInput {...register('background')} placeholder="Paste an image URL that describes this mood." />
                 </div>
                 <MoodSubmit type="submit">Add</MoodSubmit>
             </form>

@@ -17,7 +17,7 @@ const Main = styled.div`
     justify-content: center;
 `
 
-const BlurBackdrop = styled.div`
+export const BlurBackdrop = styled.div`
     backdrop-filter: blur(30px) contrast(.8);
     height: 100vh;
     width: 100vw;

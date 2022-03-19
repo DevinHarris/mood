@@ -8,11 +8,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const moodRoutes = require('./routes/moods');
 
-app.use(cors({
-    origin: ["https://m-ood.herokuapp.com/"],
+// app.options('*', cors({
+//     origin: true,
+//     credentials: true,
+//     optionsSuccessStatus: 204,
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
+// }));
+
+app.use(cors({ 
     credentials: true,
-    optionsSuccessStatus: 200,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
+    origin: process.env.ORIGIN,
+    optionsSuccessStatus: 200
 }));
 app.use(express.json());
 app.use(moodRoutes);
