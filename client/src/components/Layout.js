@@ -18,8 +18,12 @@ const Main = styled.div`
 `
 
 export const BlurBackdrop = styled.div`
+    align-items: center;
     backdrop-filter: blur(30px) contrast(.8);
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+    justify-content: center;
     width: 100vw;
 `
 

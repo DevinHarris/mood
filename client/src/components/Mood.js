@@ -9,10 +9,10 @@ import { getMood } from './moodSlice';
 import { BlurBackdrop } from './Layout';
 
 const state = store.getState();
-
+const { background } = state.mood.mood;
 
 const MoodStyled = styled.div`
-    background: url('${state.mood.mood.background}') center center no-repeat;
+    background: url('${background}') center center no-repeat;
     background-size: cover;
     color: #fff;
     text-align: center;
