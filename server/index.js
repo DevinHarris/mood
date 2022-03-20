@@ -17,7 +17,7 @@ const moodRoutes = require('./routes/moods');
 
 app.use(cors({ 
     credentials: true,
-    origin: process.env.ORIGIN,
+    origin: '*',
     optionsSuccessStatus: 200
 }));
 app.use(express.json());

@@ -44,7 +44,6 @@ router.get('/mood/:id', (req, res) => {
 
 router.put('/mood/:id', (req, res, next) => {
     const { params, body } = req;
-    console.log(body.likes);
 
     try {
         Mood.findOneAndUpdate({ id: params.id }, {
