@@ -76,8 +76,8 @@ const Mood = () => {
 
     useEffect(() => {
         dispatch(getMood(id))
-        console.log(mood);
-    }, [])
+        document.title = `A Mood shared by ${ mood.submittedBy }`;
+    }, [id])
 
 
     const handleOnClick = (type) => {
