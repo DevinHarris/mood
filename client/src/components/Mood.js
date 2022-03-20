@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import api from "../api";
@@ -31,9 +31,10 @@ const MoodStyled = styled.div`
     .share__link {
         align-self: flex-end;
         color: #fff;
-        font-size: 1.3rem;
-        margin-right: 2em;
+        font-size: 1.5rem;
+         /* margin-right: 2em; */
         margin-top: 5em;
+        font-weight: 300;
 
         a {
             color: #fff;
@@ -61,11 +62,17 @@ const MoodFeedback = styled.span`
     font-size: 1.5rem;
 `
 
+const Share = styled.span`
+    cursor: pointer;
+`
+
 const Mood = () => {
     
     const { mood } = useSelector(state => state.mood);
     const { id } = useParams();
     const dispatch = useDispatch();
+
+    const [shareLink, setShareLink] = useState('');
 
     useEffect(() => {
         dispatch(getMood(id))
@@ -95,6 +102,12 @@ const Mood = () => {
         }
     }
 
+    const handleUrlCopy = () => {
+       setShareLink(window.location.href);
+        navigator.clipboard.writeText(shareLink);
+        
+    }
+
     return (
         <MoodStyled>
             <BlurBackdrop>
@@ -104,8 +117,11 @@ const Mood = () => {
                     <span className="feedback__container"><Heart onClick={() => handleOnClick('mood/incrementLikes')} cursor="pointer" size={32} /> <MoodFeedback>{mood.likes}</MoodFeedback></span>
                     <span className="feedback__container"><HeartBreak onClick={() =>  handleOnClick('mood/incrementDislikes')} cursor="pointer" size={32} /> <MoodFeedback>{mood.dislikes}</MoodFeedback></span>
                     <div className="share__link">
-                        <span>Share this Mood: </span>
-                        <Link to={window.location.href}>{window.location.href}</Link>
+                        <Share onClick={handleUrlCopy}>
+                            {
+                                !shareLink ? 'Click to share this Mood' : 'Mood copied.'
+                            }
+                        </Share>
                     </div>
                 </div>
             </BlurBackdrop>
